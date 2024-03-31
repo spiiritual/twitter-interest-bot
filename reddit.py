@@ -1,6 +1,5 @@
 import praw
 import random
-import model
 import requests
 import imghdr
 import os

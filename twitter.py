@@ -23,12 +23,12 @@ def create_tweet():
 
     client.create_tweet(text="Hello everybody!")
 
-def upload_media_with_tweet(post : model.Post, image_filename : str):
+def upload_media_with_tweet(post, image_filename):
     client = Client(language="en-US")
     client.load_cookies("cookies.json")
 
     media_id = [client.upload_media(f"{image_filename}")]
-    text = f'"{post.title}"\n\nOn {post.subreddit} by {post.author}\n\n'
+    text = f'"{post.title}"\n\nOn r/{post.subreddit.display_name} by u/{post.author.name}\n\n'
     final_text = text + get_hashtags_for_subreddit(post.subreddit)
 
     client.create_tweet(

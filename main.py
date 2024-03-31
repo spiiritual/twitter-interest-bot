@@ -1,7 +1,5 @@
 import reddit
 import twitter
-import model
-import requests
 import os
 
 def submit_reddit_post_for_twitter():
