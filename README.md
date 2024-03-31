@@ -6,7 +6,7 @@ This is a project that aims to create an automated twitter account that selects 
 ## Required Libraries
 This project uses:
 - PRAW
-- twikit
+- twikit[*](https://github.com/spiiritual/twikit)
 - requests
 - dotenv
 
