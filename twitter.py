@@ -1,11 +1,6 @@
 from twikit import Client
 from dotenv import load_dotenv
-import model
 import os
-
-def test():
-    load_dotenv()
-    print(os.getenv('TWITTER_EMAIL'))
 
 def generate_cookies():
     client = Client(language="en-US")
@@ -17,17 +12,17 @@ def generate_cookies():
 
     client.save_cookies('cookies.json')
 
-def create_tweet():
-    client = Client(language="en-US")
-    client.load_cookies("cookies.json")
-
-    client.create_tweet(text="Hello everybody!")
-
 def upload_media_with_tweet(post, image_filename):
     client = Client(language="en-US")
     client.load_cookies("cookies.json")
+    media_id = []
 
-    media_id = [client.upload_media(f"{image_filename}")]
+    if isinstance(image_filename, list):
+        for url in image_filename:
+            media_id.append(client.upload_media(f"{url}"))
+    else:
+        media_id.append(client.upload_media(f"{image_filename}"))
+
     text = f'"{post.title}"\n\nOn r/{post.subreddit.display_name} by u/{post.author.name}\n\n'
     final_text = text + get_hashtags_for_subreddit(post.subreddit)
 

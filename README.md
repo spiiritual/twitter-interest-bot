@@ -9,6 +9,7 @@ This project uses:
 - twikit[*](https://github.com/spiiritual/twikit)
 - requests
 - dotenv
+- filetype
 
 ## Components
 
