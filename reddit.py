@@ -52,8 +52,11 @@ def select_random_top_post():
 def download_post_image(post):
     post_url = post.url
     post_id = post.id
+    headers = {
+        'User-Agent': os.getenv("REDDIT_USER_AGENT")
+    }
 
-    r = requests.get(post_url)
+    r = requests.get(post_url, headers=headers)
     if r.status_code == 200:
         image_type = get_filetype_of_file(r.content)
         if image_type:
@@ -77,9 +80,12 @@ def get_image_urls_from_gallery(post):
 def download_images_from_gallery(post):
     image_filenames = []
     image_urls = get_image_urls_from_gallery(post)
+    headers = {
+        'User-Agent': os.getenv("REDDIT_USER_AGENT")
+    }
 
     for i, url in enumerate(image_urls):
-        r = requests.get(url)
+        r = requests.get(url, headers=headers)
         if r.status_code == 200:
             image_type = get_filetype_of_file(r.content)
             if image_type:
