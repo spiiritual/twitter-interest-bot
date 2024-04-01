@@ -12,7 +12,7 @@ def generate_cookies():
 
     client.save_cookies('cookies.json')
 
-def upload_media_with_tweet(post, image_filename):
+def upload_reddit_tweet(post, image_filename):
     client = Client(language="en-US")
     client.load_cookies("cookies.json")
     media_id = []
