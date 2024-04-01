@@ -1,5 +1,8 @@
 # twitter slop poster bot
 
+slop (/släp/)
+(In the context of the internet) Effortless content posted to grow on a social media platform
+
 ## Description
 This is a project that aims to create an automated twitter account that selects random popular posts from specified subreddits and posts them on Twitter. Currently, it's configured to post from an assortment of Genshin and Honkai subreddits, but is being built to be subreddit-agnostic.
 
