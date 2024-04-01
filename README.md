@@ -19,6 +19,9 @@ The reddit.py file contains everything related to the reddit functionality of th
 ### Twitter
 The twitter.py file contains everything related to the twitter functionality of the slopbot. This includes uploading images to Twitter, generating Tweets, and posting Tweets.
 
+### main.py
+The main.py file is where tasks, such as uploading reddit posts to twitter, are written. Main.py is supposed to be where subreddit/topic specific details are added to the workflow, with reddit.py and twitter.py being decoupled from the given topic.
+
 ### .env file
 The .env file contains the credentials needed to run the twitter and reddit portions of the slopbot. It requires the following fields to be filled, in no particular order:
 - TWITTER_USERNAME
@@ -30,6 +33,8 @@ The .env file contains the credentials needed to run the twitter and reddit port
 
 ### (planned) Scheduled
 The scheduled.py file will contain tasks that must be run at a regular interval that are **not** related to the normal posting of the slopbot, including posting new game announcements and retweeting posts from official game accounts. 
+
+
 
 
 
