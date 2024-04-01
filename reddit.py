@@ -49,7 +49,6 @@ def check_if_post_is_old(post_creation_time):
 def select_random_top_post():
     return random.choice(get_top_posts())
 
-
 def download_post_image(post):
     post_url = post.url
     post_id = post.id
@@ -93,13 +92,6 @@ def download_images_from_gallery(post):
 
 def get_filetype_of_file(content):
     return filetype.guess_extension(content)
-
-def gallery_test():
-    reddit = create_reddit_instance()
-
-    post = reddit.submission(id="1bs8cga")
-    print(download_images_from_gallery(post))
-
 
 def create_reddit_instance():
     load_dotenv()
