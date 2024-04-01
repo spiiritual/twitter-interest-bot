@@ -12,12 +12,16 @@ def submit_reddit_post_for_twitter():
         image_filename = reddit.download_post_image(post)
 
     caption = f'"{post.title}"\n\nOn r/{post.subreddit.display_name} by u/{post.author.name}\n\n{twitter.get_hashtags_for_subreddit(post.subreddit.display_name)}'
-    twitter.upload_reddit_tweet(caption, image_filename)
+    twitter.upload_media_tweet(caption, image_filename)
     os.remove(image_filename)
 
 def submit_question_on_twitter():
     random = questions.get_random_question()
+    hashtags = twitter.get_hashtags_for_question_type(random["type"])
+    caption = f"{random["question"]}\n\n{hashtags}"
+
+    twitter.upload_text_tweet(caption)
 
 
 
-submit_reddit_post_for_twitter()
+submit_question_on_twitter()
