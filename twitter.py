@@ -12,7 +12,7 @@ def generate_cookies():
 
     client.save_cookies('cookies.json')
 
-def upload_reddit_tweet(post, image_filename):
+def upload_media_tweet(caption, image_filename):
     client = Client(language="en-US")
     client.load_cookies("cookies.json")
     media_id = []
@@ -22,12 +22,9 @@ def upload_reddit_tweet(post, image_filename):
             media_id.append(client.upload_media(f"{url}"))
     else:
         media_id.append(client.upload_media(f"{image_filename}"))
-
-    text = f'"{post.title}"\n\nOn r/{post.subreddit.display_name} by u/{post.author.name}\n\n'
-    final_text = text + get_hashtags_for_subreddit(post.subreddit)
-
+        
     client.create_tweet(
-        text=final_text,
+        text=caption,
         media_ids=media_id
 )
     
