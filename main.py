@@ -4,7 +4,7 @@ import questions
 import os
 
 def submit_reddit_post_for_twitter():
-    post = reddit.select_random_top_post()
+    post = reddit.select_random_top_post("Genshin_Impact+HonkaiStarRail+Genshin_Memepact", ["Fluff", "Meme / Fluff"])
 
     if hasattr(post, "gallery_data"):
         image_filename = reddit.download_images_from_gallery(post)

@@ -7,25 +7,15 @@ from dotenv import load_dotenv
 from datetime import datetime, timezone
 
 
-def get_top_posts():
+def get_top_posts(subreddit : str, flairs : list[str] | None):
     reddit = create_reddit_instance()
 
     top_posts = []
 
-    for post in reddit.subreddit("Genshin_Impact+HonkaiStarRail+Genshin_Memepact").hot(
-        limit=None
-    ):
-        if (
-            post.score > 1000
-            and not post.over_18
-            and check_if_post_is_old(post.created_utc)
-            and not post.is_self
-        ):
-            if post.subreddit.display_name == "Genshin_Impact":
-                if post.link_flair_text == "Fluff":
-                    top_posts.append(post)
-            elif post.subreddit.display_name == "HonkaiStarRail":
-                if post.link_flair_text == "Meme / Fluff":
+    for post in reddit.subreddit(subreddit).hot(limit=None):
+        if (post.score > 1000 and not post.over_18 and check_if_post_is_old(post.created_utc) and not post.is_self):
+            if flairs is not None:
+                if post.link_flair_text in flairs:
                     top_posts.append(post)
             else:
                 top_posts.append(post)
@@ -46,8 +36,8 @@ def check_if_post_is_old(post_creation_time):
         return False
 
 
-def select_random_top_post():
-    return random.choice(get_top_posts())
+def select_random_top_post(subreddit : str, flairs : list[str] = None):
+    return random.choice(get_top_posts(subreddit, flairs))
 
 def download_post_image(post):
     post_url = post.url
@@ -106,3 +96,4 @@ def create_reddit_instance():
         client_secret=os.getenv("REDDIT_CLIENT_SECRET"),
         user_agent=os.getenv("REDDIT_USER_AGENT"),
     )
+
