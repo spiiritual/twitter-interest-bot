@@ -37,7 +37,7 @@ def check_if_post_is_old(post_creation_time : str) -> bool:
         return False
 
 
-def select_random_top_post(subreddit : str, flairs : list[str] = None) -> Submission:
+def select_random_top_post(subreddit : str, flairs : list[str] | None = None) -> Submission:
     return random.choice(get_top_posts(subreddit, flairs))
 
 def download_post_image(post) -> str:
@@ -90,7 +90,7 @@ def download_images_from_gallery(post : Submission) -> list[str]:
 def get_filetype_of_file(content : bytes) -> str:
     return filetype.guess_extension(content)
 
-def create_reddit_instance():
+def create_reddit_instance() -> praw.reddit:
     load_dotenv()
     return praw.Reddit(
         client_id=os.getenv("REDDIT_CLIENT_ID"),
