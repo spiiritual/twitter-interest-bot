@@ -16,5 +16,5 @@ static_questions = [
     {"type": "hsr", "question":  "What do you not like about Honkai Star Rail?"},
 ]
 
-def get_random_question():
+def get_random_question() -> dict[str, str]:
     return random.choice(static_questions)

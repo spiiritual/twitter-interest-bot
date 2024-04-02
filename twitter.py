@@ -12,7 +12,7 @@ def generate_cookies():
 
     client.save_cookies('cookies.json')
 
-def upload_media_tweet(caption, image_filename):
+def upload_media_tweet(caption : str, image_filename : list[str] | str):
     client = Client(language="en-US")
     client.load_cookies("cookies.json")
     media_id = []
@@ -28,7 +28,7 @@ def upload_media_tweet(caption, image_filename):
         media_ids=media_id
 )
     
-def upload_text_tweet(caption):
+def upload_text_tweet(caption : str):
     client = Client(language="en-US")
     client.load_cookies("cookies.json")
 
@@ -36,10 +36,10 @@ def upload_text_tweet(caption):
         text=caption
     )
     
-def get_hashtags_for_subreddit(subreddit):
-    return "#HonkaiStarRail #HSR #StarRail #崩壊スターレイル" if subreddit == "r/HonkaiStarRail" else "#GenshinImpact #原神"
+def get_hashtags_for_subreddit(subreddit : str) -> str:
+    return "#HonkaiStarRail #HSR #StarRail #崩壊スターレイル" if subreddit == "HonkaiStarRail" else "#GenshinImpact #原神"
     
-def get_hashtags_for_question_type(type):
+def get_hashtags_for_question_type(type : str) -> str:
     return "#HonkaiStarRail #HSR #StarRail #崩壊スターレイル" if type == "hsr" else "#GenshinImpact #原神"
 
 load_dotenv()

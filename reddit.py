@@ -5,9 +5,10 @@ import filetype
 import os
 from dotenv import load_dotenv
 from datetime import datetime, timezone
+from praw.models import Submission
 
 
-def get_top_posts(subreddit : str, flairs : list[str] | None):
+def get_top_posts(subreddit : str, flairs : list[str] | None) -> list[Submission]:
     reddit = create_reddit_instance()
 
     top_posts = []
@@ -23,7 +24,7 @@ def get_top_posts(subreddit : str, flairs : list[str] | None):
     return top_posts
 
 
-def check_if_post_is_old(post_creation_time):
+def check_if_post_is_old(post_creation_time : str) -> bool:
     difference = datetime.now(timezone.utc) - datetime.fromtimestamp(
         post_creation_time, timezone.utc
     )
@@ -36,10 +37,10 @@ def check_if_post_is_old(post_creation_time):
         return False
 
 
-def select_random_top_post(subreddit : str, flairs : list[str] = None):
+def select_random_top_post(subreddit : str, flairs : list[str] = None) -> Submission:
     return random.choice(get_top_posts(subreddit, flairs))
 
-def download_post_image(post):
+def download_post_image(post) -> str:
     post_url = post.url
     post_id = post.id
     headers = {
@@ -55,7 +56,7 @@ def download_post_image(post):
                 f.write(r.content)
             return filename
 
-def get_image_urls_from_gallery(post):
+def get_image_urls_from_gallery(post : Submission) -> list[str]:
     gallery = []
     media_ids = [i["media_id"] for i in post.gallery_data["items"]]
 
@@ -67,7 +68,7 @@ def get_image_urls_from_gallery(post):
     return gallery
 
 
-def download_images_from_gallery(post):
+def download_images_from_gallery(post : Submission) -> list[str]:
     image_filenames = []
     image_urls = get_image_urls_from_gallery(post)
     headers = {
@@ -86,7 +87,7 @@ def download_images_from_gallery(post):
 
     return image_filenames
 
-def get_filetype_of_file(content):
+def get_filetype_of_file(content : bytes) -> str:
     return filetype.guess_extension(content)
 
 def create_reddit_instance():
