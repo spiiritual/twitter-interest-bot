@@ -10,10 +10,14 @@ This is a project that aims to create an automated twitter account that selects 
 
 This project uses:
 - PRAW
-- twikit[*](https://github.com/spiiritual/twikit)
+- twikit*
 - requests
 - dotenv
 - filetype
+
+*I use a [fork of twikit](https://github.com/spiiritual/twikit) that disables randomzied user-agents, mostly because I think that 
+stealthily automating Twitter isn't compatible with randomzing user agents with every usage. The regular twikit package should
+work exactly the same since I only made that change, but I'm not guaranteeing anything. 
 
 ## Components
 
