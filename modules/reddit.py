@@ -5,7 +5,7 @@ import filetype
 import os
 from dotenv import load_dotenv
 from datetime import datetime, timezone
-from database import add_used_reddit_post, check_for_reddit_post_id
+from modules.database import add_used_reddit_post, check_for_reddit_post_id
 from praw.models import Submission
 
 

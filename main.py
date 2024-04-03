@@ -1,7 +1,7 @@
-import reddit
-import twitter
-import questions
-import database
+import modules.reddit as reddit
+import modules.twitter as twitter
+import modules.questions as questions
+import modules.database as database
 import os
 import argparse
 
