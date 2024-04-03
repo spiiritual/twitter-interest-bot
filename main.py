@@ -3,6 +3,7 @@ import twitter
 import questions
 import database
 import os
+import argparse
 
 def submit_reddit_post_for_twitter():
     post = reddit.select_random_top_post("Genshin_Impact+HonkaiStarRail+Genshin_Memepact", ["Fluff", "Meme / Fluff"])
@@ -20,8 +21,6 @@ def submit_reddit_post_for_twitter():
         submit_question_on_twitter() 
         # eventually find a way to fix the none error, for now just give up
     
-    
-
        
 def submit_question_on_twitter():
     random = questions.get_random_question()
@@ -37,4 +36,13 @@ if __name__ == "__main__":
     if not os.path.isfile("slopbot.db"):
         database.create_database()
     
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-at", type=str, help="Add a twitter user to track for retweet using their @")
+    args = parser.parse_args()
+
+    if (args.at):
+        last_id = twitter.get_last_tweet_id(args.at)
+        database.add_tracked_twitter_user(args.at, last_id)
+    
+
 

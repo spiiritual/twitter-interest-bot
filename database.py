@@ -39,8 +39,6 @@ def check_for_reddit_post_id(post_id : str) -> str | None:
     else:
         return None
 
-    
-
 def get_last_tweet_id_from_tracked(screen_name : str) -> str | None:
     connection = sqlite3.connect("slopbot.db")
     cursor = connection.cursor()
