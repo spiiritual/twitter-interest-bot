@@ -35,6 +35,15 @@ def upload_text_tweet(caption : str):
     client.create_tweet(
         text=caption
     )
+
+def get_last_tweet_id(user_name: str) -> str:
+    client = Client(language="en-US")
+    client.load_cookies("cookies.json")
+
+    target = client.get_user_by_screen_name(user_name)
+    tweets = target.get_tweets(tweet_type="Tweets", count=1)
+
+    return tweets[0].id
     
 def get_hashtags_for_subreddit(subreddit : str) -> str:
     return "#HonkaiStarRail #HSR #StarRail #崩壊スターレイル" if subreddit == "HonkaiStarRail" else "#GenshinImpact #原神"

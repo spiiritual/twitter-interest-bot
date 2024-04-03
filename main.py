@@ -27,4 +27,7 @@ def submit_question_on_twitter():
 
     twitter.upload_text_tweet(caption)
 
-submit_reddit_post_for_twitter()
+def tweet_test():
+    print(twitter.get_last_tweet_id("GenshinImpact"))
+
+tweet_test()
