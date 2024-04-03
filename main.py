@@ -36,6 +36,9 @@ if __name__ == "__main__":
     if not os.path.isfile("slopbot.db"):
         database.create_database()
     
+    if not os.path.isdir("temp"):
+        os.mkdir("temp")
+    
     parser = argparse.ArgumentParser()
     parser.add_argument("-at", type=str, help="Add a twitter user to track for retweet using their @")
     args = parser.parse_args()
@@ -44,5 +47,6 @@ if __name__ == "__main__":
         last_id = twitter.get_last_tweet_id(args.at)
         database.add_tracked_twitter_user(args.at, last_id)
     
+   
 
 
