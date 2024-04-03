@@ -1,6 +1,7 @@
 import reddit
 import twitter
 import questions
+import database
 import os
 
 def submit_reddit_post_for_twitter():
@@ -27,7 +28,11 @@ def submit_question_on_twitter():
 
     twitter.upload_text_tweet(caption)
 
-def tweet_test():
-    print(twitter.get_last_tweet_id("GenshinImpact"))
+if __name__ == "__main__":
+    if not os.path.isfile("cookies.json"):
+        twitter.generate_cookies()
+    
+    if not os.path.isfile("slopbot.db"):
+        database.create_database()
+    
 
-tweet_test()
