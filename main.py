@@ -19,6 +19,8 @@ def submit_reddit_post_for_twitter():
     else:
         submit_question_on_twitter() 
         # eventually find a way to fix the none error, for now just give up
+    
+    
 
        
 def submit_question_on_twitter():

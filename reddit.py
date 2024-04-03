@@ -5,6 +5,7 @@ import filetype
 import os
 from dotenv import load_dotenv
 from datetime import datetime, timezone
+from database import add_used_reddit_post, check_for_reddit_post_id
 from praw.models import Submission
 
 
@@ -38,7 +39,20 @@ def check_if_post_is_old(post_creation_time : str) -> bool:
 
 
 def select_random_top_post(subreddit : str, flairs : list[str] | None = None) -> Submission:
-    return random.choice(get_top_posts(subreddit, flairs))
+    posts = get_top_posts(subreddit, flairs)
+    chosen_post = None
+
+    while True:
+        post = random.choice(posts)
+
+        if check_for_reddit_post_id(post_id=post.id) is not None:
+            continue
+        else:
+            chosen_post = post
+            add_used_reddit_post(chosen_post.id)
+            break
+
+    return chosen_post
 
 def download_post_image(post) -> str:
     post_url = post.url
