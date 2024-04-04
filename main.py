@@ -59,8 +59,8 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     if args.add_tracked_user:
-         last_id = twitter.get_last_tweet_id(args.at)
-         database.add_tracked_twitter_user(args.at, last_id)
+         last_id = twitter.get_last_tweet_id(args.add_tracked_user)
+         database.add_tracked_twitter_user(args.add_tracked_user, last_id)
     
     if args.checked_tracked_users:
         check_and_retweet_tracked_users()
