@@ -29,6 +29,20 @@ def submit_question_on_twitter():
 
     twitter.upload_text_tweet(caption)
 
+def check_and_retweet_tracked_users():
+    target = database.get_tracked_twitter_users()
+
+    if target is not None:
+        for account in target:
+            last_posted_tweet = twitter.get_last_tweet_id(account[0])
+            if account[1] != last_posted_tweet:
+                twitter.retweet(last_posted_tweet)
+            else:
+                print(f"No new tweets from {account[0]}")
+    else:
+        print("OY ADD SOME TRACKED ACCOUNTS FIRST")
+
+
 if __name__ == "__main__":
     if not os.path.isfile("cookies.json"):
         twitter.generate_cookies()
@@ -40,13 +54,16 @@ if __name__ == "__main__":
         os.mkdir("temp")
     
     parser = argparse.ArgumentParser()
-    parser.add_argument("-at", type=str, help="Add a twitter user to track for retweet using their @")
+    parser.add_argument("-at", "--add-tracked-user", type=str, help="Add a twitter user to track for retweet using their @")
+    parser.add_argument("-ct", "--checked-tracked-users", action='store_true', help="Check the tracked twitter users for new retweets")
     args = parser.parse_args()
 
-    if (args.at):
-        last_id = twitter.get_last_tweet_id(args.at)
-        database.add_tracked_twitter_user(args.at, last_id)
+    if args.add_tracked_user:
+         last_id = twitter.get_last_tweet_id(args.at)
+         database.add_tracked_twitter_user(args.at, last_id)
     
-   
-
-
+    if args.checked_tracked_users:
+        check_and_retweet_tracked_users()
+    
+    print(args)
+        

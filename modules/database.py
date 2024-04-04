@@ -39,17 +39,15 @@ def check_for_reddit_post_id(post_id : str) -> str | None:
     else:
         return None
 
-def get_last_tweet_id_from_tracked(screen_name : str) -> str | None:
+def get_tracked_twitter_users() -> list[str]:
     connection = sqlite3.connect("slopbot.db")
     cursor = connection.cursor()
-
-    target = cursor.execute("SELECT last_tweet_id FROM twitter_users WHERE screen_name = ?", (screen_name,)).fetchone()
+    
+    target = cursor.execute("SELECT * FROM twitter_users").fetchall()
 
     cursor.close()
     connection.close()
 
-    if target is not None:
-        return target[0]
-    else:
-        return None
+    return target
+
 

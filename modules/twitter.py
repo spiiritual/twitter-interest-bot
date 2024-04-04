@@ -53,7 +53,7 @@ def get_hashtags_for_question_type(type : str) -> str:
 
 load_dotenv()
 
-def retweet(tweet_id : str):
+def retweet(tweet_id : str) -> None:
     client = Client(language="en-US")
     client.load_cookies("cookies.json")
 
