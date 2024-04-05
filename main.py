@@ -25,7 +25,7 @@ def submit_reddit_post_for_twitter():
 def submit_question_on_twitter():
     random = questions.get_random_question()
     hashtags = twitter.get_hashtags_for_question_type(random["type"])
-    caption = f"{random["question"]}\n\n{hashtags}"
+    caption = f'{random["question"]}\n\n{hashtags}'
 
     twitter.upload_text_tweet(caption)
 
