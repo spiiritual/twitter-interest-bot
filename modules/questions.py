@@ -50,4 +50,4 @@ def get_random_dynamic_question() -> dict[str, str]:
     selected_question = random.choice(dynamic_questions)
     selected_subject = random.choice(dynamic_subjects)
 
-    return {"type": selected_subject["type"], "question": f"{selected_question} {selected_subject["subject"]}?"}
+    return {"type": selected_subject["type"], "question": f'{selected_question} {selected_subject["subject"]}?'}
