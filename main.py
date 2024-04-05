@@ -2,13 +2,16 @@ import os
 import argparse
 import random
 
+from datetime import datetime
+from zoneinfo import ZoneInfo
+
 import modules.reddit as reddit
 import modules.twitter as twitter
 import modules.questions as questions
 import modules.database as database
 
 def submit_reddit_post_for_twitter():
-    print("Submiting reddit post for twitter...")
+    print_with_time("Submiting reddit post for twitter...")
     post = reddit.select_random_top_post("Genshin_Impact+HonkaiStarRail+Genshin_Memepact", ["Fluff", "Meme / Fluff"])
 
     if hasattr(post, "gallery_data"):
@@ -21,15 +24,15 @@ def submit_reddit_post_for_twitter():
         twitter.upload_media_tweet(caption, image_filename)
         os.remove(image_filename)
     else:
-        submit_question_on_twitter() 
+        submit_question_on_twitter()
         # eventually find a way to fix the none error, for now just give up
     
        
 def submit_question_on_twitter():
-    print("Submiting question for twitter...")
-    random = questions.get_random_question()
-    hashtags = twitter.get_hashtags_for_question_type(random['type'])
-    caption = f"{random['question']}\n\n{hashtags}"
+    print_with_time("Submiting question for twitter...")
+    random_question = questions.get_random_question()
+    hashtags = twitter.get_hashtags_for_question_type(random_question['type'])
+    caption = f"{random_question['question']}\n\n{hashtags}"
 
     twitter.upload_text_tweet(caption)
 
@@ -52,10 +55,12 @@ def check_and_retweet_tracked_users():
                 twitter.retweet(last_posted_tweet)
                 database.update_last_tweet_id(account[0], last_posted_tweet)
             else:
-                print(f"No new tweets from {account[0]}")
+                print_with_time(f"No new tweets from {account[0]}")
     else:
-        print("OY ADD SOME TRACKED ACCOUNTS FIRST")
+        print("Please add a tracked user first.")
 
+def print_with_time(text: str):
+    print(f"[{datetime.now(ZoneInfo("America/New_York"))}] {text}")
 
 if __name__ == "__main__":
     if not os.path.isfile("cookies.json"):
