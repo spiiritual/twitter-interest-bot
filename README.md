@@ -43,10 +43,6 @@ The .env file contains the credentials needed to run the twitter and reddit port
 - REDDIT_CLIENT_SECRET
 - REDDIT_USER_AGENT
 
-### (planned) Scheduled
-
-The scheduled.py file will contain tasks that must be run at a regular interval that are **not** related to the normal posting of the slopbot, including posting new game announcements and retweeting posts from official game accounts. 
-
 
 
 
