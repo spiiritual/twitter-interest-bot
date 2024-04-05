@@ -71,6 +71,7 @@ if __name__ == "__main__":
     parser.add_argument("-ct", "--checked-tracked-users", action='store_true', help="Check the tracked twitter users for new retweets")
     parser.add_argument("-sr", "--submit-reddit-post", action='store_true', help="Submit a random reddit post to twitter")
     parser.add_argument("-sq", "--submit-question", action='store_true', help="Submit a random question to twitter")
+    parser.add_argument("-r", "--random", action='store_true', help="Randomly submit a question or reddit post to twitter")
     args = parser.parse_args()
 
     if args.add_tracked_user:
@@ -85,5 +86,6 @@ if __name__ == "__main__":
 
     if args.submit_question:
         submit_question_on_twitter()
-    
-    submit_random()
+        
+    if args.random:
+        submit_random()
