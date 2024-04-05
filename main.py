@@ -56,6 +56,8 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("-at", "--add-tracked-user", type=str, help="Add a twitter user to track for retweet using their @")
     parser.add_argument("-ct", "--checked-tracked-users", action='store_true', help="Check the tracked twitter users for new retweets")
+    parser.add_argument("-sr", "--submit-reddit-post", action='store_true', help="Submit a random reddit post to twitter")
+    parser.add_argument("-sq", "--submit-question", action='store_true', help="Submit a random question to twitter")
     args = parser.parse_args()
 
     if args.add_tracked_user:
@@ -64,6 +66,12 @@ if __name__ == "__main__":
     
     if args.checked_tracked_users:
         check_and_retweet_tracked_users()
+
+    if args.submit_reddit_post:
+        submit_reddit_post_for_twitter()
+
+    if args.submit_question:
+        submit_question_on_twitter()
     
     print(args)
         
