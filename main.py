@@ -60,7 +60,7 @@ def check_and_retweet_tracked_users():
         print("Please add a tracked user first.")
 
 def print_with_time(text: str):
-    print(f"[{datetime.now(ZoneInfo("America/New_York"))}] {text}")
+    print(f"[{datetime.now(ZoneInfo('America/New_York'))}] {text}")
 
 if __name__ == "__main__":
     if not os.path.isfile("cookies.json"):
