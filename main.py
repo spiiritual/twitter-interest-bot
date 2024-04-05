@@ -20,14 +20,16 @@ def submit_reddit_post_for_twitter():
         image_filename = reddit.download_post_image(post)
 
     if image_filename is not None:
-        caption = f'"{post.title}"\n\nOn r/{post.subreddit.display_name} by u/{post.author.name}\n\n{twitter.get_hashtags_for_subreddit(post.subreddit.display_name)}'
+        caption = f'"{sanitize_post_title(post.title)}"\n\nOn r/{post.subreddit.display_name} by u/{post.author.name}\n\n{twitter.get_hashtags_for_subreddit(post.subreddit.display_name)}'
         twitter.upload_media_tweet(caption, image_filename)
         os.remove(image_filename)
     else:
         submit_question_on_twitter()
         # eventually find a way to fix the none error, for now just give up
     
-       
+def sanitize_post_title(title: str) -> str:
+    return title.replace("#", "").replace("@", "")
+
 def submit_question_on_twitter():
     print_with_time("Submiting question for twitter...")
     random_question = questions.get_random_question()
