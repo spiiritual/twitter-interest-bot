@@ -6,18 +6,21 @@ slop (/släp/) - Effortless content posted to grow on a social media platform
 
 This is a project that aims to create an automated twitter account that selects random popular posts from specified subreddits and posts them on Twitter. Currently, it's configured to post from an assortment of Genshin and Honkai subreddits, but is being built to be subreddit-agnostic.
 
-## Required Libraries
+## How to Use?
 
-This project uses:
-- PRAW
-- twikit*
-- requests
-- dotenv
-- filetype
 
-*I use a [fork of twikit](https://github.com/spiiritual/twikit) that disables randomzied user-agents, mostly because I think that 
-stealthily automating Twitter isn't compatible with randomzing user agents with every usage. The regular twikit package should
-work exactly the same since I only made that change, but I'm not guaranteeing anything. 
+0. Install Python, create a twitter account, create a Reddit account, create a [Reddit application](https://www.reddit.com/prefs/apps)
+1. Clone the repository or [download it as zip](https://github.com/spiiritual/twitter-slopbot/archive/refs/heads/main.zip)
+2. Go into the folder where you extracted/cloned it and install the python requirements by opening a command prompt in the folder and running ```python pip install -r requirements.txt```
+3. Create a file called ```.env``` in the folder where the slopbot is located and fill out the details according to the .env file section in Components (scroll down)
+4. Run the script by running ```python main.py [INSERT ARGUMENT HERE]```
+
+### Arguments
+
+```-at```: Add a twitter user to track for retweet using their @
+```-ct```: Check the tracked twitter users for new retweets
+```-sr```: Submit a random reddit post to twitter
+```-sq```: Submit a random question to twitter
 
 ## Components
 
