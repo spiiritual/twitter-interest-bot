@@ -50,4 +50,15 @@ def get_tracked_twitter_users() -> list[str]:
 
     return target
 
+def update_last_tweet_id(screen_name : str, last_tweet_id : str):
+    connection = sqlite3.connect("slopbot.db")
+    cursor = connection.cursor()
+
+    cursor.execute("UPDATE twitter_users SET last_tweet_id = ? WHERE screen_name = ?", (last_tweet_id, screen_name))
+
+    connection.commit()
+
+    cursor.close()
+    connection.close()
+
 

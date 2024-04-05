@@ -50,6 +50,7 @@ def check_and_retweet_tracked_users():
             last_posted_tweet = twitter.get_last_tweet_id(account[0])
             if account[1] != last_posted_tweet:
                 twitter.retweet(last_posted_tweet)
+                database.update_last_tweet_id(account[0], last_posted_tweet)
             else:
                 print(f"No new tweets from {account[0]}")
     else:
