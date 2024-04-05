@@ -1,5 +1,6 @@
 import os
 import argparse
+import random
 
 import modules.reddit as reddit
 import modules.twitter as twitter
@@ -7,6 +8,7 @@ import modules.questions as questions
 import modules.database as database
 
 def submit_reddit_post_for_twitter():
+    print("Submiting reddit post for twitter...")
     post = reddit.select_random_top_post("Genshin_Impact+HonkaiStarRail+Genshin_Memepact", ["Fluff", "Meme / Fluff"])
 
     if hasattr(post, "gallery_data"):
@@ -24,11 +26,21 @@ def submit_reddit_post_for_twitter():
     
        
 def submit_question_on_twitter():
+    print("Submiting question for twitter...")
     random = questions.get_random_question()
     hashtags = twitter.get_hashtags_for_question_type(random['type'])
     caption = f"{random['question']}\n\n{hashtags}"
 
     twitter.upload_text_tweet(caption)
+
+def submit_random():
+    choice = random.randint(1, 10)
+
+    if choice <= 8:
+        submit_reddit_post_for_twitter()
+    else:
+        submit_question_on_twitter()
+    
 
 def check_and_retweet_tracked_users():
     target = database.get_tracked_twitter_users()
