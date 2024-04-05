@@ -10,6 +10,9 @@ COPY . /app
 # Install cron
 RUN apk add --no-cache dcron
 
+# Install the requirements
+RUN pip install --no-cache-dir -r requirements.txt
+
 # Add the cron job to run main.py every two hours
 RUN echo "0 */2 * * * python /app/main.py >> /var/log/cron.log 2>&1" > /etc/crontabs/root
 
