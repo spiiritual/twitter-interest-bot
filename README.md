@@ -8,7 +8,6 @@ This is a project that aims to create an automated twitter account that selects 
 
 ## How to Use?
 
-
 0. Install Python, create a twitter account, create a Reddit account, create a [Reddit application](https://www.reddit.com/prefs/apps)
 1. Clone the repository or [download it as zip](https://github.com/spiiritual/twitter-slopbot/archive/refs/heads/main.zip)
 2. Go into the folder where you extracted/cloned it and install the python requirements by opening a command prompt in the folder and running ```python pip install -r requirements.txt```
