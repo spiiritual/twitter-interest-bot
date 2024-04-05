@@ -22,7 +22,12 @@ def submit_reddit_post_for_twitter():
     if image_filename is not None:
         caption = f'"{sanitize_post_title(post.title)}"\n\nOn r/{post.subreddit.display_name} by u/{post.author.name}\n\n{twitter.get_hashtags_for_subreddit(post.subreddit.display_name)}'
         twitter.upload_media_tweet(caption, image_filename)
-        os.remove(image_filename)
+
+        if isinstance(image_filename, list):
+            for file in image_filename:
+                os.remove(file)
+        else:
+            os.remove(image_filename)
     else:
         submit_question_on_twitter()
         # eventually find a way to fix the none error, for now just give up
