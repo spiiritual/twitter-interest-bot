@@ -86,4 +86,4 @@ if __name__ == "__main__":
     if args.submit_question:
         submit_question_on_twitter()
     
-    print(args)
+    submit_random()
