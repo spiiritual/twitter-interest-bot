@@ -18,8 +18,11 @@ This is a project that aims to create an automated twitter account that selects 
 ### Arguments
 
 ```-at```: Add a twitter user to track for retweet using their @
+
 ```-ct```: Check the tracked twitter users for new retweets
+
 ```-sr```: Submit a random reddit post to twitter
+
 ```-sq```: Submit a random question to twitter
 
 ## Components
