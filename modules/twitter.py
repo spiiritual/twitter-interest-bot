@@ -51,6 +51,14 @@ def retweet(tweet_id : str) -> None:
 
     client.retweet(tweet_id)
 
+def reply_to_tweet(tweet_id : str, text : str) -> None:
+    client = Client(language="en-US")
+    client.load_cookies("cookies.json")
+
+    tweet = client.get_tweet_by_id(tweet_id)
+
+    tweet.reply(text)
+
 def get_hashtags_for_subreddit(subreddit : str) -> str:
     return "#HonkaiStarRail #HSR #StarRail #崩壊スターレイル" if subreddit == "HonkaiStarRail" else "#GenshinImpact #原神"
     
