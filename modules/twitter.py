@@ -1,4 +1,5 @@
-from twikit import Client
+from twikit import Client, Tweet
+from twikit.utils import build_query, SearchOptions, Result
 from dotenv import load_dotenv
 import os
 
@@ -58,6 +59,24 @@ def reply_to_tweet(tweet_id : str, text : str) -> None:
     tweet = client.get_tweet_by_id(tweet_id)
 
     tweet.reply(text)
+
+def get_popular_tweets_from_hashtag(hashtag : str | list[str]) -> Result[Tweet]:
+    client = Client(language="en-US")
+    client.load_cookies("cookies.json")
+
+    if isinstance(hashtag, list):
+        search_options = SearchOptions(
+            hashtags=hashtag
+        )
+    else:
+        search_options = SearchOptions(
+            hashtags=[hashtag]
+        )
+    
+    query = build_query(text="", options=search_options)
+    return client.search_tweet(query, 'Top')
+
+    
 
 def get_hashtags_for_subreddit(subreddit : str) -> str:
     return "#HonkaiStarRail #HSR #StarRail #崩壊スターレイル" if subreddit == "HonkaiStarRail" else "#GenshinImpact #原神"
